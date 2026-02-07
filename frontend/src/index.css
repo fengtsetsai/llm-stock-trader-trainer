@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-cyber-border;
+  }
+  
+  body {
+    @apply bg-cyber-bg text-cyber-primary;
+    font-family: 'Courier New', monospace;
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}
+
+@layer components {
+  .cyber-panel {
+    @apply bg-cyber-surface border border-cyber-border rounded-lg shadow-cyber;
+    backdrop-filter: blur(10px);
+  }
+  
+  .cyber-button {
+    @apply bg-cyber-surface border border-cyber-primary text-cyber-primary px-4 py-2 rounded;
+    @apply hover:bg-cyber-primary hover:text-cyber-bg transition-all duration-300;
+    @apply shadow-cyber hover:shadow-cyber-lg;
+  }
+  
+  .cyber-button-secondary {
+    @apply bg-cyber-surface border border-cyber-secondary text-cyber-secondary px-4 py-2 rounded;
+    @apply hover:bg-cyber-secondary hover:text-cyber-bg transition-all duration-300;
+    @apply shadow-neon-pink;
+  }
+  
+  .cyber-input {
+    @apply bg-cyber-bg border border-cyber-border text-cyber-primary px-3 py-2 rounded;
+    @apply focus:outline-none focus:border-cyber-primary focus:shadow-cyber;
+  }
+  
+  .neon-text {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+  
+  .glitch {
+    animation: glitch 1s linear infinite;
+  }
+  
+  @keyframes glitch {
+    2%, 64% {
+      transform: translate(2px, 0) skew(0deg);
+    }
+    4%, 60% {
+      transform: translate(-2px, 0) skew(0deg);
+    }
+    62% {
+      transform: translate(0, 0) skew(5deg);
+    }
+  }
+  
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scanline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      transparent 0%,
+      rgba(0, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    animation: scan 3s linear infinite;
+    pointer-events: none;
+  }
+  
+  @keyframes scan {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+}

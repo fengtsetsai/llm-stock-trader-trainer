@@ -1,0 +1,194 @@
+.trade-journal {
+  background: rgba(10, 25, 47, 0.7);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.journal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.journal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.trade-count {
+  font-size: 0.875rem;
+  color: #64ffda;
+  padding: 0.25rem 0.75rem;
+  background: rgba(100, 255, 218, 0.1);
+  border-radius: 4px;
+  border: 1px solid rgba(100, 255, 218, 0.3);
+}
+
+.no-trades {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: #64ffda;
+}
+
+.no-trades p {
+  margin: 0.5rem 0;
+}
+
+.no-trades .hint {
+  font-size: 0.875rem;
+  color: rgba(100, 255, 218, 0.6);
+  margin-top: 1rem;
+}
+
+.journal-body {
+  padding: 1rem;
+}
+
+.journal-table-wrapper {
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.journal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.journal-table thead {
+  position: sticky;
+  top: 0;
+  background: rgba(0, 255, 255, 0.1);
+  z-index: 10;
+}
+
+.journal-table th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: bold;
+  color: #00ffff;
+  border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+  white-space: nowrap;
+}
+
+.journal-table tbody tr {
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+  transition: background-color 0.2s;
+}
+
+.journal-table tbody tr:hover {
+  background: rgba(0, 255, 255, 0.05);
+}
+
+.journal-table td {
+  padding: 0.75rem;
+  color: #e0e0e0;
+}
+
+.trade-row.buy {
+  border-left: 3px solid #ff4444;
+}
+
+.trade-row.sell {
+  border-left: 3px solid #00ff00;
+}
+
+.timestamp {
+  color: #64ffda;
+  font-size: 0.8rem;
+}
+
+.type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.type-badge.buy {
+  background: rgba(255, 68, 68, 0.2);
+  color: #ff4444;
+  border: 1px solid rgba(255, 68, 68, 0.4);
+}
+
+.type-badge.sell {
+  background: rgba(0, 255, 0, 0.2);
+  color: #00ff00;
+  border: 1px solid rgba(0, 255, 0, 0.4);
+}
+
+.shares, .price {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+.total {
+  text-align: right;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.total.expense {
+  color: #ff4444;
+}
+
+.total.profit {
+  color: #00ff00;
+}
+
+.cash-after {
+  text-align: right;
+  font-weight: bold;
+  color: #ffd700;
+  font-family: 'Courier New', monospace;
+}
+
+/* Custom scrollbar styling */
+.journal-table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.journal-table-wrapper::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.journal-table-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.journal-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 255, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .journal-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .journal-table {
+    font-size: 0.75rem;
+  }
+
+  .journal-table th,
+  .journal-table td {
+    padding: 0.5rem;
+  }
+}
