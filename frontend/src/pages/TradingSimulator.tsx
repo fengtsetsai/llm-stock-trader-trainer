@@ -675,7 +675,7 @@ export default function TradingSimulator() {
 
       {/* Footer */}
       <div className="text-center text-cyber-primary text-xs font-mono opacity-50">
-        <p>神經網路驅動 • 資料串流運作中</p>
+        <p>AI 驅動 • 資料串流運作中</p>
       </div>
       
       {/* News Modal */}
