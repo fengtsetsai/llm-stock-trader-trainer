@@ -4,8 +4,8 @@ WORKDIR /app
 
 RUN pip install --no-cache-dir --upgrade pip
 
-COPY backend/pyproject.toml backend/README.md ./
-COPY backend/app/ ./app/
+COPY pyproject.toml README.md ./
+COPY app/ ./app/
 
 RUN pip install --no-cache-dir .
 
