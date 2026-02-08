@@ -27,5 +27,9 @@
     }
   },
   "include": ["src"],
+  "exclude": [
+    "src/components/Chart/charts/TaiwanFuturesChart.tsx",
+    "src/components/Chart/charts/SimpleTradingViewChart.tsx"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

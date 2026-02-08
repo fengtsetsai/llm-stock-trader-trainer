@@ -653,7 +653,7 @@ export function SimpleTradingViewChart({
         width: chartContainerRef.current.clientWidth,
         height: rsiChartHeight,
         layout: {
-          backgroundColor: '#ffffff',
+          background: { color: '#ffffff' },
           textColor: '#333',
         },
         grid: {
@@ -758,7 +758,7 @@ export function SimpleTradingViewChart({
         width: chartContainerRef.current.clientWidth,
         height: macdChartHeight,
         layout: {
-          backgroundColor: '#ffffff',
+          background: { color: '#ffffff' },
           textColor: '#333',
         },
         grid: {
