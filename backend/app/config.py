@@ -21,7 +21,12 @@ class Settings(BaseSettings):
     port: int = 8000
 
     # CORS
-    cors_origins: List[str] = ["http://localhost:3000", "http://localhost:5173"]
+    cors_origins: List[str] = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ]
+    # Additional CORS origin for production (e.g. Railway frontend URL)
+    cors_extra_origin: str = ""
 
     # Logging
     log_level: str = "INFO"
