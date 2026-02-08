@@ -103,7 +103,7 @@ export default function TradingSimulator() {
         await initializeNews(requestData, response.all_dates)
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to initialize playback')
+      setError(err instanceof Error ? err.message : '初始化播放失敗')
       console.error('Playback initialization error:', err)
     } finally {
       setLoading(false)
@@ -179,7 +179,7 @@ export default function TradingSimulator() {
       
     } catch (err) {
       console.error('[initializeNews] Error:', err)
-      setError('Failed to load news data')
+      setError('載入新聞資料失敗')
       setNewsLoading(false)
       setNewsProgress({ percent: 0, message: '' })
     }
@@ -226,7 +226,7 @@ export default function TradingSimulator() {
       console.log('[handleBuy] Trade executed:', response.message)
     } catch (err: any) {
       console.error('Buy operation failed:', err)
-      const errorMessage = err?.response?.data?.detail || err?.message || 'Failed to execute buy'
+      const errorMessage = err?.response?.data?.detail || err?.message || '買入執行失敗'
       setError(errorMessage)
       console.error('Error details:', err?.response?.data)
     } finally {
@@ -258,7 +258,7 @@ export default function TradingSimulator() {
       console.log('[handleSell] Trade executed:', response.message)
     } catch (err: any) {
       console.error('Sell operation failed:', err)
-      const errorMessage = err?.response?.data?.detail || err?.message || 'Failed to execute sell'
+      const errorMessage = err?.response?.data?.detail || err?.message || '賣出執行失敗'
       setError(errorMessage)
       console.error('Error details:', err?.response?.data)
     } finally {
@@ -444,14 +444,14 @@ export default function TradingSimulator() {
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-5xl font-bold neon-text text-cyber-primary tracking-wider">
-          ⚡ CYBER TRADER ⚡
+          ⚡ 賽博交易員 ⚡
         </h1>
         <p className="text-cyber-secondary text-sm font-mono">
-          LLM Stock Trader Training System v0.1.0
+          LLM 股票交易訓練系統 v0.1.0
         </p>
         <div className="flex justify-center gap-2 text-xs font-mono">
-          <span className="text-cyber-accent">SYSTEM:</span>
-          <span className="text-cyber-success animate-pulse">ONLINE</span>
+          <span className="text-cyber-accent">系統狀態:</span>
+          <span className="text-cyber-success animate-pulse">上線中</span>
         </div>
       </div>
 
@@ -459,33 +459,33 @@ export default function TradingSimulator() {
       <div className="cyber-panel p-6 space-y-4">
         <h2 className="text-2xl font-bold text-cyber-primary flex items-center gap-2">
           <span className="text-cyber-accent">►</span>
-          SESSION CONFIG
+          交易設定
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="block text-cyber-primary text-sm font-mono">
-              TICKER SYMBOL
+              股票代碼
             </label>
             <StockSearch
               value={symbol}
               onChange={setSymbol}
-              placeholder="Enter stock code or Chinese name (e.g., 8033 or 雷虎)"
+              placeholder="輸入股票代碼或名稱（例如：8033 或 雷虎）"
               className="cyber-input w-full font-mono"
             />
           </div>
           
           <div className="space-y-2">
             <label className="block text-cyber-primary text-sm font-mono">
-              TIME RANGE MODE
+              時間範圍模式
             </label>
             <select
               value={useDateRange ? 'custom' : 'period'}
               onChange={(e) => setUseDateRange(e.target.value === 'custom')}
               className="cyber-input w-full font-mono"
             >
-              <option value="period">PERIOD</option>
-              <option value="custom">CUSTOM DATE RANGE</option>
+              <option value="period">固定期間</option>
+              <option value="custom">自訂日期範圍</option>
             </select>
           </div>
         </div>
@@ -493,24 +493,24 @@ export default function TradingSimulator() {
         {!useDateRange ? (
           <div className="space-y-2">
             <label className="block text-cyber-primary text-sm font-mono">
-              TIME PERIOD
+              時間期間
             </label>
             <select
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
               className="cyber-input w-full font-mono"
             >
-              <option value="1mo">1 MONTH</option>
-              <option value="3mo">3 MONTHS</option>
-              <option value="6mo">6 MONTHS</option>
-              <option value="1y">1 YEAR</option>
+              <option value="1mo">1 個月</option>
+              <option value="3mo">3 個月</option>
+              <option value="6mo">6 個月</option>
+              <option value="1y">1 年</option>
             </select>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="block text-cyber-primary text-sm font-mono">
-                START DATE
+                開始日期
               </label>
               <input
                 type="date"
@@ -522,7 +522,7 @@ export default function TradingSimulator() {
             
             <div className="space-y-2">
               <label className="block text-cyber-primary text-sm font-mono">
-                END DATE
+                結束日期
               </label>
               <input
                 type="date"
@@ -540,7 +540,7 @@ export default function TradingSimulator() {
             disabled={loading || newsLoading}
             className="cyber-button flex-1 px-8 py-3 font-mono font-bold"
           >
-            {loading ? '⟳ LOADING...' : '▶ START NEW SESSION'}
+            {loading ? '⟳ 載入中...' : '▶ 開始新交易'}
           </button>
           
           <button
@@ -548,7 +548,7 @@ export default function TradingSimulator() {
             disabled={loading || newsLoading}
             className="cyber-button-secondary flex-1 px-8 py-3 font-mono font-bold"
           >
-            {newsLoading ? '📰 LOADING NEWS...' : '📰 START WITH NEWS'}
+            {newsLoading ? '📰 載入新聞中...' : '📰 搭配新聞開始'}
           </button>
         </div>
         
@@ -583,7 +583,7 @@ export default function TradingSimulator() {
           <div className="cyber-panel p-4">
             <h3 className="text-lg font-bold text-cyber-primary mb-3 flex items-center gap-2">
               <span className="text-cyber-accent">►</span>
-              TECHNICAL INDICATORS
+              技術指標
             </h3>
             <div className="flex flex-wrap gap-4">
               <label className="flex items-center gap-2 cursor-pointer">
@@ -594,7 +594,7 @@ export default function TradingSimulator() {
                   className="w-4 h-4 accent-cyber-accent"
                 />
                 <span className="font-mono text-sm text-cyber-secondary">
-                  Moving Averages (MA 10, 20)
+                  移動平均線 (MA 10, 20)
                 </span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
@@ -605,7 +605,7 @@ export default function TradingSimulator() {
                   className="w-4 h-4 accent-cyber-accent"
                 />
                 <span className="font-mono text-sm text-cyber-secondary">
-                  Bollinger Bands
+                  布林通道
                 </span>
               </label>
             </div>
@@ -617,10 +617,10 @@ export default function TradingSimulator() {
               <div className="cyber-panel p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-bold text-cyber-primary font-mono">
-                    CHART: {symbol}
+                    走勢圖：{symbol}
                   </h3>
                   <div className="text-cyber-secondary text-sm font-mono">
-                    {chartData.length} BARS LOADED
+                    已載入 {chartData.length} 根 K 棒
                   </div>
                 </div>
                 <CandlestickChart
@@ -675,7 +675,7 @@ export default function TradingSimulator() {
 
       {/* Footer */}
       <div className="text-center text-cyber-primary text-xs font-mono opacity-50">
-        <p>POWERED BY NEURAL NETWORKS • DATA STREAM ACTIVE</p>
+        <p>神經網路驅動 • 資料串流運作中</p>
       </div>
       
       {/* News Modal */}

@@ -16,7 +16,7 @@ interface StockSearchProps {
 export const StockSearch: React.FC<StockSearchProps> = ({
   value,
   onChange,
-  placeholder = 'Enter stock code or Chinese name (e.g., 8033 or 雷虎)',
+  placeholder = '輸入股票代碼或名稱（例如：8033 或 雷虎）',
   className = '',
 }) => {
   const [inputValue, setInputValue] = useState('')
@@ -67,12 +67,12 @@ export const StockSearch: React.FC<StockSearchProps> = ({
           setSuggestions(results)
           setShowSuggestions(true)
         } else {
-          setError('Stock not found')
+          setError('找不到該股票')
           setSuggestions([])
           setShowSuggestions(false)
         }
       } catch (err) {
-        setError('Search failed. Please try again.')
+        setError('搜尋失敗，請重試。')
         setSuggestions([])
         setShowSuggestions(false)
       } finally {
@@ -142,7 +142,7 @@ export const StockSearch: React.FC<StockSearchProps> = ({
             onClick={handleClear}
             className="px-3 py-2 text-xs font-mono bg-cyber-dark/50 hover:bg-cyber-dark/70 text-cyber-primary border border-cyber-primary/30 hover:border-cyber-accent rounded transition-colors backdrop-blur-sm"
           >
-            CHANGE
+            更換
           </button>
         </div>
       )}

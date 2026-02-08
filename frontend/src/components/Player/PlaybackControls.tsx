@@ -39,7 +39,7 @@ export default function PlaybackControls({
       {/* Header */}
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-bold neon-text text-cyber-primary">
-          ▶ PLAYBACK CONTROL
+          ▶ 播放控制
         </h3>
         <div className="text-cyber-primary font-mono text-sm">
           {currentIndex} / {totalCount}
@@ -76,7 +76,7 @@ export default function PlaybackControls({
           onClick={onReset}
           disabled={totalCount === 0}
           className="cyber-button p-3 rounded-full hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-          title="Reset"
+          title="重置"
         >
           <RotateCcw className="w-5 h-5" />
         </button>
@@ -85,7 +85,7 @@ export default function PlaybackControls({
           onClick={onPrevious}
           disabled={currentIndex === 0 || totalCount === 0}
           className="cyber-button p-3 rounded-full hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-          title="Previous"
+          title="上一根"
         >
           <SkipBack className="w-5 h-5" />
         </button>
@@ -96,7 +96,7 @@ export default function PlaybackControls({
           className={`p-4 rounded-full hover:scale-110 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 ${
             isPlaying ? 'cyber-button-secondary animate-pulse' : 'cyber-button'
           }`}
-          title={isPlaying ? 'Pause' : 'Play'}
+          title={isPlaying ? '暫停' : '播放'}
         >
           {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-1" />}
         </button>
@@ -105,7 +105,7 @@ export default function PlaybackControls({
           onClick={onNext}
           disabled={currentIndex >= totalCount - 1 || totalCount === 0}
           className="cyber-button p-3 rounded-full hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-          title="Next"
+          title="下一根"
         >
           <SkipForward className="w-5 h-5" />
         </button>
@@ -113,7 +113,7 @@ export default function PlaybackControls({
 
       {/* Speed Control */}
       <div className="flex items-center justify-center gap-2">
-        <span className="text-cyber-primary text-sm font-mono">SPEED:</span>
+        <span className="text-cyber-primary text-sm font-mono">速度：</span>
         <div className="flex gap-2">
           {[0.5, 1, 2, 4].map((speed) => (
             <button
@@ -135,9 +135,9 @@ export default function PlaybackControls({
       {/* Status */}
       <div className="text-center text-cyber-primary text-sm font-mono">
         {isPlaying ? (
-          <span className="animate-pulse">► PLAYING @ {playbackSpeed}x...</span>
+          <span className="animate-pulse">► 播放中 @ {playbackSpeed}x...</span>
         ) : (
-          <span>|| PAUSED</span>
+          <span>|| 已暫停</span>
         )}
       </div>
     </div>

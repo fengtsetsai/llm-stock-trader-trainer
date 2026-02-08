@@ -40,14 +40,14 @@ const TradeJournal: React.FC<TradeJournalProps> = ({ trades }) => {
   return (
     <div className="trade-journal">
       <div className="journal-header">
-        <h3>交易日誌 / Trade Journal</h3>
+        <h3>交易日誌</h3>
         <span className="trade-count">總共 {trades.length} 筆交易</span>
       </div>
 
       {trades.length === 0 ? (
         <div className="no-trades">
           <p>尚未進行任何交易</p>
-          <p className="hint">點擊 Buy 或 Sell 按鈕開始交易</p>
+          <p className="hint">點擊買入或賣出按鈕開始交易</p>
         </div>
       ) : (
         <div className="journal-body">
@@ -69,7 +69,7 @@ const TradeJournal: React.FC<TradeJournalProps> = ({ trades }) => {
                     <td className="timestamp">{formatDateTime(trade.timestamp)}</td>
                     <td className="trade-type">
                       <span className={`type-badge ${trade.type}`}>
-                        {trade.type === 'buy' ? '買入 BUY' : '賣出 SELL'}
+                        {trade.type === 'buy' ? '買入' : '賣出'}
                       </span>
                     </td>
                     <td className="shares">{formatShares(trade.shares)}</td>

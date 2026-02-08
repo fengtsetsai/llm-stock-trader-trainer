@@ -18,7 +18,7 @@ export default function NewsModal({ news, allNews = [], onClose, onContinue }: N
         <div className="flex items-center justify-between border-b border-cyber-accent pb-4">
           <h2 className="text-2xl font-bold text-cyber-primary flex items-center gap-2">
             <span className="text-cyber-accent">📰</span>
-            NEWS ALERT
+            新聞快報
           </h2>
           <button
             onClick={onClose}
@@ -106,7 +106,7 @@ export default function NewsModal({ news, allNews = [], onClose, onContinue }: N
             onClick={onContinue}
             className="cyber-button flex-1 px-6 py-3 font-mono font-bold"
           >
-            ▶ CONTINUE PLAYBACK
+            ▶ 繼續播放
           </button>
         </div>
       </div>
