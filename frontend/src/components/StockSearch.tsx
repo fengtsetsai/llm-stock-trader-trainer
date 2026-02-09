@@ -10,13 +10,13 @@ interface StockSearchProps {
 }
 
 /**
- * Stock search component that supports both stock code and Chinese name input
+ * Stock search component that supports stock code input
  * Displays results as "8033.TW - 雷虎" but returns the symbol (e.g., "8033.TW")
  */
 export const StockSearch: React.FC<StockSearchProps> = ({
   value,
   onChange,
-  placeholder = '輸入股票代碼或名稱（例如：8033 或 雷虎）',
+  placeholder = '輸入股票代碼（例如：2330、AAPL）',
   className = '',
 }) => {
   const [inputValue, setInputValue] = useState('')
@@ -60,7 +60,7 @@ export const StockSearch: React.FC<StockSearchProps> = ({
       setError(null)
 
       try {
-        // Use search API which supports both code and Chinese name
+        // Use search API with stock code
         const results = await searchStocks(inputValue.trim())
         
         if (results.length > 0) {
