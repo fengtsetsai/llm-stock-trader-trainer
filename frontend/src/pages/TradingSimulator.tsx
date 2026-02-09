@@ -444,7 +444,7 @@ export default function TradingSimulator() {
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-5xl font-bold neon-text text-cyber-primary tracking-wider">
-          ⚡ 賽博交易員 ⚡
+          ⚡ 虎科大財金交易員 ⚡
         </h1>
         <p className="text-cyber-secondary text-sm font-mono">
           LLM 股票交易訓練系統 v0.1.0
