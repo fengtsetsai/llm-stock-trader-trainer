@@ -1,0 +1,22 @@
+name: Deploy to School Server
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SCHOOL_HOST }}
+          username: ${{ secrets.SCHOOL_USER }}
+          key: ${{ secrets.SCHOOL_SSH_KEY }}
+          script: |
+            cd /opt/llm-stock-trader-trainer
+            git pull origin main
+            echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > .env
+            echo "CORS_EXTRA_ORIGIN=${{ secrets.CORS_EXTRA_ORIGIN }}" >> .env
+            docker compose up --build -d
