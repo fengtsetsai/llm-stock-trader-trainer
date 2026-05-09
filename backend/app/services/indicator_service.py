@@ -75,9 +75,7 @@ class IndicatorService:
             df["macd_histogram"] = macd_indicator.macd_diff()
 
             # Bollinger Bands
-            bb_indicator = BollingerBands(
-                close=df["Close"], window=bb_period, window_dev=bb_std
-            )
+            bb_indicator = BollingerBands(close=df["Close"], window=bb_period, window_dev=bb_std)
             df["bb_upper"] = bb_indicator.bollinger_hband()
             df["bb_middle"] = bb_indicator.bollinger_mavg()
             df["bb_lower"] = bb_indicator.bollinger_lband()
