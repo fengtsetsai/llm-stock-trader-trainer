@@ -25,8 +25,15 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "http://localhost:5173",
     ]
-    # Additional CORS origin for production (e.g. Railway frontend URL)
+    # Additional CORS origins for production, comma-separated
+    # e.g. "https://app1.railway.app,https://app2.run.app"
     cors_extra_origin: str = ""
+
+    @property
+    def cors_extra_origins(self) -> List[str]:
+        if not self.cors_extra_origin:
+            return []
+        return [o.strip() for o in self.cors_extra_origin.split(",") if o.strip()]
 
     # Logging
     log_level: str = "INFO"
