@@ -21,7 +21,7 @@ import {
 import type { CandleData, TradingAccountStatus, Trade, DailyNews } from '../types'
 
 export default function TradingSimulator() {
-  const [symbol, setSymbol] = useState('AAPL')
+  const [symbol, setSymbol] = useState('2303.TW')
   const [period, setPeriod] = useState('1mo')
   const [useDateRange, setUseDateRange] = useState(false)
   const [startDate, setStartDate] = useState('')
