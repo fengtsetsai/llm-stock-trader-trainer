@@ -150,7 +150,7 @@ export default function CandlestickChart({
 
     // Transform data - show all data
     const visibleData = data.map((item) => ({
-      time: (new Date(item.timestamp).getTime() / 1000) as Time,
+      time: item.timestamp.split('T')[0] as Time,
       open: item.open,
       high: item.high,
       low: item.low,
@@ -165,7 +165,7 @@ export default function CandlestickChart({
     // Add trade markers
     if (trades && trades.length > 0) {
       const tradeMarkers = trades.map(trade => ({
-        time: (new Date(trade.timestamp).getTime() / 1000) as Time,
+        time: trade.timestamp.split('T')[0] as Time,
         position: trade.type === 'buy' ? 'belowBar' as const : 'aboveBar' as const,
         color: trade.type === 'buy' ? '#ff0055' : '#00ff00', // Red for buy, green for sell (Taiwan style)
         shape: trade.type === 'buy' ? 'arrowUp' as const : 'arrowDown' as const,
@@ -177,10 +177,10 @@ export default function CandlestickChart({
     // Add news markers
     if (newsMarkers.size > 0) {
       data.forEach(item => {
-        const dateStr = new Date(item.timestamp).toISOString().split('T')[0]
+        const dateStr = item.timestamp.split('T')[0]
         if (newsMarkers.has(dateStr)) {
           allMarkers.push({
-            time: (new Date(item.timestamp).getTime() / 1000) as Time,
+            time: item.timestamp.split('T')[0] as Time,
             position: 'aboveBar' as const,
             color: '#ffff00', // Yellow for news
             shape: 'circle' as const,
@@ -192,7 +192,7 @@ export default function CandlestickChart({
     
     if (allMarkers.length > 0) {
       // Sort markers by time to avoid overlapping issues
-      allMarkers.sort((a, b) => (a.time as number) - (b.time as number))
+      allMarkers.sort((a, b) => (a.time as string).localeCompare(b.time as string))
       candlestickSeriesRef.current.setMarkers(allMarkers)
     } else {
       candlestickSeriesRef.current.setMarkers([])
@@ -200,7 +200,7 @@ export default function CandlestickChart({
 
     // Update volume - show all data (紅漲綠跌)
     const visibleVolumeData = data.map((item) => ({
-      time: (new Date(item.timestamp).getTime() / 1000) as Time,
+      time: item.timestamp.split('T')[0] as Time,
       value: item.volume,
       color: item.close >= item.open ? 'rgba(255, 0, 85, 0.5)' : 'rgba(0, 255, 0, 0.5)', // 上漲紅色，下跌綠色
     }))
@@ -273,7 +273,7 @@ export default function CandlestickChart({
           .filter((item) => item[`ma_${period}` as keyof CandleData] !== undefined &&
 item[`ma_${period}` as keyof CandleData] !== null)
           .map((item) => ({
-            time: (new Date(item.timestamp).getTime() / 1000) as Time,
+            time: item.timestamp.split('T')[0] as Time,
             value: item[`ma_${period}` as keyof CandleData] as number,
           }))
 
@@ -314,7 +314,7 @@ item[`ma_${period}` as keyof CandleData] !== null)
       const bbUpperData = data
         .filter((item) => item.bb_upper !== undefined && item.bb_upper !== null)
         .map((item) => ({
-          time: (new Date(item.timestamp).getTime() / 1000) as Time,
+          time: item.timestamp.split('T')[0] as Time,
           value: item.bb_upper!,
         }))
 
@@ -333,7 +333,7 @@ item[`ma_${period}` as keyof CandleData] !== null)
       const bbMiddleData = data
         .filter((item) => item.bb_middle !== undefined && item.bb_middle !== null)
         .map((item) => ({
-          time: (new Date(item.timestamp).getTime() / 1000) as Time,
+          time: item.timestamp.split('T')[0] as Time,
           value: item.bb_middle!,
         }))
 
@@ -353,7 +353,7 @@ item[`ma_${period}` as keyof CandleData] !== null)
       const bbLowerData = data
         .filter((item) => item.bb_lower !== undefined && item.bb_lower !== null)
         .map((item) => ({
-          time: (new Date(item.timestamp).getTime() / 1000) as Time,
+          time: item.timestamp.split('T')[0] as Time,
           value: item.bb_lower!,
         }))
 

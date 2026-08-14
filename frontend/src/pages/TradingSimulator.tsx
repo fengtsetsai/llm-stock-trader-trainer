@@ -274,15 +274,11 @@ export default function TradingSimulator() {
       const response = await getNextCandle(playbackId, 1)
       
       if (response.current_data) {
-        const timestamp = new Date(response.current_data.timestamp).getTime()
         const newCandle = response.current_data
-        
+
         setChartData(prev => {
-          const lastTimestamp = prev.length > 0 
-            ? new Date(prev[prev.length - 1].timestamp).getTime() 
-            : 0
-          
-          if (timestamp !== lastTimestamp) {
+          const lastTimestamp = prev.length > 0 ? prev[prev.length - 1].timestamp : ''
+          if (newCandle.timestamp !== lastTimestamp) {
             return [...prev, newCandle]
           }
           return prev
@@ -301,7 +297,7 @@ export default function TradingSimulator() {
         
         // Check for news on this date (if news enabled)
         if (newsEnabled) {
-          const dateStr = new Date(newCandle.timestamp).toISOString().split('T')[0]
+          const dateStr = newCandle.timestamp.split('T')[0]
           console.log('[getNext] Checking news for date:', dateStr, 'Has marker:', newsMarkers.has(dateStr))
           
           if (newsMarkers.has(dateStr)) {
