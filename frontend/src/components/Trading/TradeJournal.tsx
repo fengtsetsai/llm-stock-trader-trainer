@@ -20,21 +20,14 @@ const TradeJournal: React.FC<TradeJournalProps> = ({ trades }) => {
     return value.toLocaleString('en-US')
   }
 
-  const formatDateTime = (timestamp: string): string => {
-    const date = new Date(timestamp)
-    return date.toLocaleString('en-US', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    })
+  const formatDate = (timestamp: string): string => {
+    // Extract YYYY-MM-DD directly to avoid timezone conversion mismatches
+    return timestamp.split('T')[0]
   }
 
-  // Sort trades by timestamp, newest first
+  // Sort trades by timestamp string (YYYY-MM-DD prefix is sortable), newest first
   const sortedTrades = [...trades].sort((a, b) =>
-    new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    b.timestamp.localeCompare(a.timestamp)
   )
 
   return (
@@ -55,7 +48,7 @@ const TradeJournal: React.FC<TradeJournalProps> = ({ trades }) => {
             <table className="journal-table">
               <thead>
                 <tr>
-                  <th>時間</th>
+                  <th>日期</th>
                   <th>類型</th>
                   <th>股數</th>
                   <th>價格</th>
@@ -66,7 +59,7 @@ const TradeJournal: React.FC<TradeJournalProps> = ({ trades }) => {
               <tbody>
                 {sortedTrades.map((trade) => (
                   <tr key={trade.id} className={`trade-row ${trade.type}`}>
-                    <td className="timestamp">{formatDateTime(trade.timestamp)}</td>
+                    <td className="timestamp">{formatDate(trade.timestamp)}</td>
                     <td className="trade-type">
                       <span className={`type-badge ${trade.type}`}>
                         {trade.type === 'buy' ? '買入' : '賣出'}
