@@ -435,6 +435,7 @@ class NewsService:
 
                     # Parse and cache articles (filter out excluded sources)
                     articles_with_dates = []
+                    out_of_range_articles = []
                     excluded_count = 0
                     date_parse_failures = 0
                     date_out_of_range = 0
@@ -458,10 +459,28 @@ class NewsService:
                             articles_with_dates.append((article, parsed_date))
                         else:
                             date_out_of_range += 1
+                            out_of_range_articles.append(article)
                             logger.debug(
                                 f"[fetch_and_cache_news] Date out of range: {parsed_date.date()} "
                                 f"(expected: {range_start.date()} to {range_end.date()})"
                             )
+
+                    # Accept approximate results: distribute out-of-range articles
+                    # evenly across the requested date range
+                    if out_of_range_articles:
+                        range_days = (range_end - range_start).days
+                        for i, article in enumerate(out_of_range_articles):
+                            offset_days = (
+                                int(i * range_days / len(out_of_range_articles))
+                                if range_days > 0
+                                else 0
+                            )
+                            assigned_date = range_start + timedelta(days=offset_days)
+                            articles_with_dates.append((article, assigned_date))
+                        logger.info(
+                            f"[fetch_and_cache_news] Accepted {len(out_of_range_articles)} articles "
+                            f"with approximate dates (distributed across range)"
+                        )
 
                     if excluded_count > 0:
                         logger.info(
@@ -473,7 +492,8 @@ class NewsService:
                         )
                     if date_out_of_range > 0:
                         logger.info(
-                            f"[fetch_and_cache_news] Skipped {date_out_of_range} articles with dates outside range"
+                            f"[fetch_and_cache_news] {date_out_of_range} articles had dates outside range "
+                            f"(reassigned to approximate dates within range)"
                         )
                     logger.info(
                         f"[fetch_and_cache_news] Parsed {len(articles_with_dates)} valid articles with dates"

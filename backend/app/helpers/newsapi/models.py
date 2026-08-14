@@ -52,7 +52,7 @@ class ScrapingConfig:
     """Configuration for scraping behavior."""
 
     max_pages: int = 1
-    max_articles: int = 3
+    max_articles: int = 10
     delay_min: float = 2.0
     delay_max: float = 6.0
     max_retries: int = 5
