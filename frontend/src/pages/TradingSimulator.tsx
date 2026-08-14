@@ -56,7 +56,7 @@ export default function TradingSimulator() {
   const [maPeriods] = useState<number[]>([10, 20])
   const [showBB, setShowBB] = useState(false)
 
-  const playIntervalRef = useRef<number | null>(null)
+  const playIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   // Initialize playback session
   const initializePlayback = async (withNews: boolean = false) => {
