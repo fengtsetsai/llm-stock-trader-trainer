@@ -46,14 +46,22 @@ const PerformanceAnalysis: React.FC<PerformanceAnalysisProps> = ({ trades, accou
     const totalBuyValue = buyTrades.reduce((sum, t) => sum + t.total, 0)
     const totalSellValue = sellTrades.reduce((sum, t) => sum + t.total, 0)
 
-    // Calculate P/L for each sell trade
+    // Calculate P/L per sell using running average cost basis
+    let heldShares = 0
+    let heldCost = 0
     const sellPLs: number[] = []
-    sellTrades.forEach(sellTrade => {
-      // Find corresponding buy trades (FIFO)
-      const sellPrice = sellTrade.price
-      const buyPrice = buyTrades.length > 0 ? buyTrades[buyTrades.length - 1].price : 0
-      const pl = (sellPrice - buyPrice) * sellTrade.shares
-      sellPLs.push(pl)
+
+    trades.forEach(trade => {
+      if (trade.type === 'buy') {
+        heldShares += trade.shares
+        heldCost += trade.total
+      } else if (trade.type === 'sell') {
+        const avgCost = heldShares > 0 ? heldCost / heldShares : 0
+        const pl = (trade.price - avgCost) * trade.shares
+        sellPLs.push(pl)
+        heldShares -= trade.shares
+        heldCost -= avgCost * trade.shares
+      }
     })
 
     const profits = sellPLs.filter(pl => pl > 0)
